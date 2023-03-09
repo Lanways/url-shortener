@@ -22,6 +22,11 @@ app.set('view engine', 'hbs')
 app.get('/', (req, res) => {
   res.render('index')
 })
-app.listen(3000, () => {
+
+app.get('/shorten', (req, res) => {
+  res.render('index')
+})
+
+app.listen(2000, () => {
   console.log('Express is running on http://localhost3000')
 })
