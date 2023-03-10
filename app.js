@@ -2,6 +2,8 @@ const express = require('express')
 const Link = require('./models/link')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
+const { Script } = require('vm')
 if (process.env.NODE_ENW !== 'production') {
   require('dotenv').config()
 }
@@ -18,15 +20,30 @@ db.once('open', () => {
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/shorten', (req, res) => {
+app.post('/shorten', (req, res) => {
+  console.log('req.body', req.body.url)
+  random_URL()
   res.render('new')
 })
 
 app.listen(3000, () => {
   console.log('Express is running on http://localhost3000')
 })
+
+function random_URL() {
+  let words = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let randomNumber = ''
+
+  for (let i = 0; i < 5; i++) {
+    let index = Math.floor(Math.random() * words.length)
+    console.log(index)
+    randomNumber += words[index]
+  }
+  console.log(randomNumber)
+}
