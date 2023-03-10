@@ -24,9 +24,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/shorten', (req, res) => {
-  res.render('index')
+  res.render('new')
 })
 
-app.listen(2000, () => {
+app.listen(3000, () => {
   console.log('Express is running on http://localhost3000')
 })
