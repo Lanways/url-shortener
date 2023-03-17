@@ -1,5 +1,12 @@
-<div class="container d-flex justify-content-center">
+<div class="d-flex justify-content-center mt-3">
+  {{#if errorMessage}}
+  <p style="color:red;">
+    {{errorMessage}}
+  </p>
+  {{/if}}
+</div>
 
+<div class="container d-flex justify-content-center">
   <form action="/" method="POST">
     <div class="form-grop">
       <label for="originalurl">網址</label>

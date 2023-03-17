@@ -18,7 +18,7 @@ function random_URL() {
 }
 
 router.post('/', (req, res) => {
-  console.log('req.body', req.body)
+  // console.log('req.body', req.body)
   const { originalUrl } = req.body
 
   Link.findOne({ originalUrl })
@@ -40,13 +40,15 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:shortUrl', (req, res) => {
-  console.log('req.params', req.params)
+  // console.log('req.params', req.params)
   const shortUrl = 'http://localhost:3000/' + req.params.shortUrl
 
   Link.findOne({ shortUrl })
     .then(data => {
-      console.log(data.originalUrl)
-      if (!data) res.send(`<script>alert(Can't found the URL)</script>`)
+      if (!data) {
+        res.render('index', { errorMessage: 'Invalid url please re-enter' })
+        return
+      }
       res.redirect(data.originalUrl)
     })
 })
